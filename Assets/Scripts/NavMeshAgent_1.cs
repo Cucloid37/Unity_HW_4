@@ -6,8 +6,9 @@ using UnityEngine.AI;
 [RequireComponent(typeof(NavMeshAgent))]
 public class NavMeshAgent_1 : MonoBehaviour
 {
+    [SerializeField] private Transform _player;
     [SerializeField] private Transform[] WayPoints;
-    private NavMeshAgent _agent;
+    private static NavMeshAgent _agent;
     private int _currentPointIndex;
     private Vector3 _radius;
 
@@ -18,18 +19,29 @@ public class NavMeshAgent_1 : MonoBehaviour
 
     private void Start()
     {
+        
         _agent.SetDestination(WayPoints[1].position);
     }
 
     private void Update()
     {
-        if(_agent.remainingDistance < 1)
+        Invoke(nameof(Patrul), 3.0f);       
+
+    }
+
+    private void Patrul()
+    {
+        if (_agent.remainingDistance < 1)
         {
             _currentPointIndex = (_currentPointIndex + 1) % WayPoints.Length;
             _agent.SetDestination(WayPoints[_currentPointIndex].position);
         }
+    }
 
+    public static void Chase(Transform _player)
+    {
         
-
+        _agent.SetDestination(_player.position);
+        
     }
 }

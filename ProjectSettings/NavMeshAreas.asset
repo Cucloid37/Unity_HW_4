@@ -13,8 +13,8 @@ NavMeshProjectSettings:
     cost: 3
   - name: shelter
     cost: 10
-  - name: 
-    cost: 1
+  - name: Wall
+    cost: 100
   - name: 
     cost: 1
   - name: 
