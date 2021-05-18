@@ -34,14 +34,13 @@ public class NewController : MonoBehaviour
 
     private void JumpLogic()
     {
-        if(isGround)
+        if (Input.GetAxis("Jump") > 0)
         {
-            if(Input.GetAxis("Jump") > 0)
+            if (isGround)
             {
-                transform.Translate(transform.up * _jampForce);
-               // _rb.AddForce(transform.up * _jampForce);
-            }
-            
+                //transform.Translate(transform.up * _jampForce);
+                _rb.AddForce(transform.up * _jampForce);
+            }   
         }
     }
 

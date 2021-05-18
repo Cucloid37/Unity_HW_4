@@ -6,7 +6,7 @@ using UnityEngine;
 public class Observe : MonoBehaviour
 {
     [SerializeField] private Transform _player;
-    static bool ItIsPlayer;
+    protected private bool ItIsPlayer;
 
     #region OnTrigger
     private void OnTriggerEnter(Collider other)
@@ -36,7 +36,7 @@ public class Observe : MonoBehaviour
             
             if(!ItIsPlayer)
             {
-
+                NavMeshAgent_1.Stop();
             }
         }
 
