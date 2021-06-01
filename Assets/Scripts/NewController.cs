@@ -8,18 +8,30 @@ public class NewController : MonoBehaviour
     [SerializeField] private float _jampForce;
     [SerializeField] private Vector3 _move;
     [SerializeField] private GameObject _camera;
+    [SerializeField] private GameObject _bomb;
     private bool isGround;
     private Rigidbody _rb;
+
 
     private void Start()
     {
         _rb = GetComponent<Rigidbody>();
+        
     }
 
     private void FixedUpdate()
     {
         MoveLogic();
         JumpLogic();
+        BombLogic();
+    }
+
+    private void BombLogic()
+    {
+        if(Input.GetKeyDown(KeyCode.R))
+        {
+            Instantiate(_bomb, _rb.position, Quaternion.identity);
+        }
     }
 
     private void MoveLogic()
@@ -38,7 +50,6 @@ public class NewController : MonoBehaviour
         {
             if (isGround)
             {
-                //transform.Translate(transform.up * _jampForce);
                 _rb.AddForce(transform.up * _jampForce);
             }   
         }
@@ -46,11 +57,14 @@ public class NewController : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        Debug.Log(collision.collider);
-        Debug.Log(collision.collider.GetComponent<Collider>());
         if (collision.collider.GetComponent<Collider>())
         {
             isGround = true;
         }
+    }
+
+    private void OnCollisionExit(Collision collision)
+    {
+            isGround = false;
     }
 }
